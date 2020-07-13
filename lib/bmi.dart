@@ -16,6 +16,16 @@ class _BMIState extends State<BMI> {
   String _resultReading = "";
   String _resultStatus = "";
 
+  void _doRestart() {
+    setState(() {
+      _ageController.text = '';
+      _weightController.text = '';
+      _heightController.text = '';
+      _resultStatus = '';
+      _resultReading = '';
+    });
+  }
+
   void _calculateBMI() {
     setState(() {
       int age = int.parse(_ageController.text);
@@ -60,6 +70,14 @@ class _BMIState extends State<BMI> {
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                _doRestart();
+              },
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -113,7 +131,7 @@ class _BMIState extends State<BMI> {
                             labelStyle: TextStyle(color: Colors.white),
                             hintText: "eg: 5.7",
                             hintStyle: TextStyle(color: Colors.white30)),
-                      ), // 0.09290304
+                      ),
                       TextFormField(
                         style: TextStyle(
                           fontSize: 17.0,
